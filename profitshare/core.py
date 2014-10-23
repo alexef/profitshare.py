@@ -19,7 +19,6 @@ class ProfitShare(object):
         self.key = key
 
     def _post(self, url, data=None):
-        data = data or {}
         req_url = SERVER_URL + url + '/?' + PADDING
         date = strftime(DATE_FORMAT, gmtime())
         signature_string = (
@@ -34,8 +33,9 @@ class ProfitShare(object):
             'X-PS-Accept': 'json',
             'X-PS-Auth': auth,
         }
-        r = requests.post(req_url, data=urlencode(data), headers=headers)
-        return r.text
+        data = urlencode(data or {})
+        r = requests.post(req_url, data=data, headers=headers)
+        return r.json()
 
     def affiliate_links(self, name, url):
         URL = 'affiliate-links'
