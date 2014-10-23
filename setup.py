@@ -6,4 +6,7 @@ setup(name='profitshare',
       description='ProfitShare API wrapper',
       packages=['profitshare'],
       requires=['requests'],
+      author='Alex Eftimie',
+      author_email='alex@eftimie.ro',
+      url='https://github.com/alexef/profitshare.py',
 )
