@@ -1,5 +1,5 @@
 from time import strftime, gmtime
-from urllib import urlencode
+from urllib.parse import urlencode
 from hashlib import sha1
 import hmac
 import requests
@@ -23,7 +23,7 @@ class ProfitShare(object):
         date = strftime(DATE_FORMAT, gmtime())
         signature_string = (
             'POST{url}/?{PADDING}/{user}{date}'
-        ).format(url=url, user=self.user, date=date, PADDING=PADDING)
+        ).format(url=url, user=self.user, date=date, PADDING=PADDING).encode()
         auth = hmac.new(self.key, signature_string, sha1).hexdigest()
         headers = {
             'Date': date,
